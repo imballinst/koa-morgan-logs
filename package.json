@@ -1,0 +1,16 @@
+{
+  "name": "koa-morgan-logs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/imballinst/koa-morgan-logs",
+  "author": "Try Ajitiono <ballinst@gmail.com>",
+  "license": "MIT",
+  "packageManager": "yarn@4.9.1",
+  "dependencies": {
+    "@koa/bodyparser": "5.1.1",
+    "@koa/router": "13.1.0",
+    "axios": "1.8.4",
+    "koa": "2.16.1",
+    "morgan": "1.10.0"
+  }
+}
