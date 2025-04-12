@@ -10,7 +10,7 @@ node index.js
 node request.js
 
 # Result on the server
-2025-04-12T23:03:46.916Z {"userId":"123"} {"message":{"userId":"123"}}
+Sat, 12 Apr 2025 23:08:41 GMT {"userId":"123"} {"message":{"userId":"123"}}
 ```
 
 Some findings:
