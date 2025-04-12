@@ -14,13 +14,7 @@ morgan.token("responseBody", (_, res) => {
   return JSON.stringify(res.body);
 });
 
-const logger = morgan((tokens, req, res) => {
-  return [
-    new Date().toISOString(),
-    tokens.requestBody(req, res),
-    tokens.responseBody(req, res),
-  ].join(" ");
-});
+const logger = morgan(":date :requestBody :responseBody");
 
 app.use(bodyParser());
 

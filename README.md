@@ -1,6 +1,19 @@
 # koa-morgan-logs
 
-This is an example repository that I used to understand how middlewares work. In this case, I want to create a logger than can log the response body. Some findings:
+This is an example repository that I used to understand how middlewares work. In this case, I want to create a logger than can log the response body.
+
+```sh
+# Run the server
+node index.js
+
+# Run the request
+node request.js
+
+# Result on the server
+2025-04-12T23:03:46.916Z {"userId":"123"} {"message":{"userId":"123"}}
+```
+
+Some findings:
 
 ## `morgan` internally uses `on-finished` package
 
