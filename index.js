@@ -14,31 +14,24 @@ morgan.token("responseBody", (_, res) => {
   return JSON.stringify(res.body);
 });
 
-const logger = morgan(
-  (tokens, req, res) => {
-    return [
-      new Date().toISOString(),
-      tokens.requestBody(req, res),
-      tokens.responseBody(req, res),
-    ].join(" ");
-  },
-  {
-    // Will immediately log on request instead of log on response.
-    // By default this is `false`, `morgan` internally uses `onFinished` from `on-finished` package
-    // to determine if all handlers have been finished or not.
-    //
-    // If this is `true`, then the logger has to be placed after `await next()`.
-    immediate: true,
-  }
-);
+const logger = morgan((tokens, req, res) => {
+  return [
+    new Date().toISOString(),
+    tokens.requestBody(req, res),
+    tokens.responseBody(req, res),
+  ].join(" ");
+});
 
 app.use(bodyParser());
 
 app.use(async (ctx, next) => {
-  await next();
+  return new Promise((resolve, reject) => {
+    logger(ctx.request, ctx.response, (err) => {
+      if (err) reject(err);
 
-  // Swap position to above `next` call if `immediate: false`.
-  logger(ctx.request, ctx.response, () => {});
+      resolve(ctx);
+    });
+  }).then(next);
 });
 
 router.post("/", (ctx) => {
