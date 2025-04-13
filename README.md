@@ -3,6 +3,9 @@
 This is an example repository that I used to understand how middlewares work. In this case, I want to create a logger than can log the response body.
 
 ```sh
+# Install dependencies
+yarn
+
 # Run the server
 node index.js
 
