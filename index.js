@@ -18,11 +18,9 @@ app.use(bodyParser());
 
 const logger = morgan(":date :requestBody :responseBody");
 
-app.use(async (ctx, next) => {
+app.use((ctx, next) => {
   return new Promise((resolve) => {
-    logger(ctx.request, ctx.response, () => {
-      resolve(undefined);
-    });
+    logger(ctx.request, ctx.response, resolve);
   }).then(next);
 });
 
