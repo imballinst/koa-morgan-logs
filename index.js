@@ -14,16 +14,14 @@ morgan.token("responseBody", (_, res) => {
   return JSON.stringify(res.body);
 });
 
-const logger = morgan(":date :requestBody :responseBody");
-
 app.use(bodyParser());
 
-app.use(async (ctx, next) => {
-  return new Promise((resolve, reject) => {
-    logger(ctx.request, ctx.response, (err) => {
-      if (err) reject(err);
+const logger = morgan(":date :requestBody :responseBody");
 
-      resolve(ctx);
+app.use(async (ctx, next) => {
+  return new Promise((resolve) => {
+    logger(ctx.request, ctx.response, () => {
+      resolve(undefined);
     });
   }).then(next);
 });

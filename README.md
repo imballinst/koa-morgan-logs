@@ -41,3 +41,5 @@ Previously, I thought the `await next()` is "just because". Turns out it can be 
 ## `app.use()` expects the middleware function to return a Promise
 
 It didn't register to me before, but upon reading the source code of `koa-morgan` https://github.com/koa-modules/morgan/blob/master/index.js#L29-L38 I realized that the middleware function _always_ expects a Promise to be returned in the function. That's why we need to have an async function to call the `await next()` as pointed in the point above.
+
+Additionally, the `koa-morgan` code perhaps is not valid anymore for `morgan`. This is because, as we see from the [morgan source code](https://github.com/expressjs/morgan/blob/master/index.js#L133-L144), the `next` call, which is the 3rd parameter of the logger, apparently does not include any argument at all. So, the `error` will always be undefined.
